@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calcolo Pergola SPACE</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <h1>Calcolo Pergola SPACE</h1>
+  <label for="modello">Seleziona il modello:</label>
+  <select id="modello">
+    <option value="mono_bq">SPACE MONO CAMPATA BQ</option>
+    <option value="doppia_bq">SPACE DOPPIA CAMPATA BQ</option>
+    <option value="tripla_bq">SPACE TRIPLA CAMPATA BQ</option>
+    <option value="mono_ps">SPACE MONO CAMPATA PS</option>
+    <option value="doppia_ps">SPACE DOPPIA CAMPATA PS</option>
+    <option value="tripla_ps">SPACE TRIPLA CAMPATA PS</option>
+  </select>
+
+  <form id="form">
+    <label>Larghezza (cm): <input type="number" id="larghezza" required></label>
+    <label>Profondità (cm): <input type="number" id="profondita" required></label>
+    <label>Altezza anteriore (cm): <input type="number" id="anteriore" required></label>
+    <label>Altezza posteriore (cm): <input type="number" id="posteriore" required></label>
+    <label>Tettuccio:
+      <select id="tettuccio">
+        <option value="SI">SI</option>
+        <option value="NO">NO</option>
+      </select>
+    </label>
+    <label>Montaggio:
+      <select id="montaggio">
+        <option value="soffitto">soffitto</option>
+        <option value="parete">parete</option>
+      </select>
+    </label>
+  </form>
+
+  <div id="risultati">
+    <h2>Risultati</h2>
+    <pre id="output">Inserisci i dati per vedere i risultati.</pre>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
