@@ -1,33 +1,110 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPACE MONO CAMPATA BQ</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input[type="number"] {
+      width: 100px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .input-group {
+      margin-bottom: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>SPACE MONO CAMPATA BQ</h1>
-  <form>
-    <label>Larghezza (mm): <input type="number" id="larghezza"></label><br>
-    <label>Profondità (mm): <input type="number" id="profondita"></label><br>
-    <label>Altezza anteriore (mm): <input type="number" id="anteriore"></label><br>
-    <label>Altezza posteriore (mm): <input type="number" id="posteriore"></label><br>
-    <label>Tettuccio:
-      <select id="tettuccio">
-        <option value="SI">SI</option>
-        <option value="NO">NO</option>
-      </select>
-    </label><br>
-    <label>Montaggio:
-      <select id="montaggio">
-        <option value="parete">parete</option>
-        <option value="soffitto">soffitto</option>
-      </select>
-    </label><br><br>
-    <button type="button" onclick="calcola()">Calcola</button>
-  </form>
-  <pre id="output">Inserisci i dati e premi "Calcola".</pre>
-  <script src="script.js"></script>
+  <h1>SPACE MONO CAMPATA BQ - Calcolatore</h1>
+
+  <div class="input-group">
+    <label>Larghezza (mm): <input type="number" id="larghezza" /></label>
+  </div>
+  <div class="input-group">
+    <label>Profondità (mm): <input type="number" id="profondita" /></label>
+  </div>
+  <div class="input-group">
+    <label>H Posteriore (mm): <input type="number" id="hpost" /></label>
+  </div>
+  <div class="input-group">
+    <label>H Anteriore (mm): <input type="number" id="hanter" /></label>
+  </div>
+
+  <button onclick="calcolaTagli()">Calcola</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Componente</th>
+        <th>Pezzi</th>
+        <th>Taglio</th>
+      </tr>
+    </thead>
+    <tbody id="risultati"></tbody>
+  </table>
+
+  <script>
+    function calcolaTagli() {
+      const L = parseFloat(document.getElementById("larghezza").value);
+      const P = parseFloat(document.getElementById("profondita").value);
+      const Hpost = parseFloat(document.getElementById("hpost").value);
+      const Hanter = parseFloat(document.getElementById("hanter").value);
+
+      if (isNaN(L) || isNaN(P) || isNaN(Hpost) || isNaN(Hanter)) {
+        alert("Inserisci tutti i valori");
+        return;
+      }
+
+      const risultati = [
+        { comp: "BQ", pezzi: 1, taglio: L - 15 },
+        { comp: "ESTERNO GUIDE", pezzi: "", taglio: L - 57 },
+        { comp: "GRONDA", pezzi: 1, taglio: L - 49 },
+        { comp: "TRAVE TETTO", pezzi: 1, taglio: L - 186 },
+        { comp: "FRANGITRATTA", pezzi: 1, taglio: L - 151 },
+        { comp: "RULLO TRASP. AeB", pezzi: 2, taglio: L - 570 },
+        { comp: "RULLO TRASP. (BOX)", pezzi: 1, taglio: 770 },
+        { comp: "PROFILO TELINO", pezzi: 1, taglio: L - 90 },
+        { comp: "GUIDA", pezzi: 2, taglio: Math.sqrt(Math.pow(Hpost - Hanter, 2) + Math.pow(P - 32.5, 2)) },
+        { comp: "PIANTONE", pezzi: 2, taglio: L - 10 },
+        { comp: "TELO LARGHEZZA", pezzi: 1, taglio: L },
+        { comp: "TELO ALTEZZA", pezzi: 1, taglio: Math.sqrt(Math.pow(Hpost - Hanter, 2) + Math.pow(P - 32.5, 2)) },
+        { comp: "TELINO LARGHEZZA", pezzi: 1, taglio: L - 100 },
+        { comp: "TELINO ALTEZZA", pezzi: 1, taglio: 380 },
+        { comp: "CINGHIA", pezzi: 2, taglio: Math.sqrt(Math.pow(Hpost - Hanter, 2) + Math.pow(P - 32.5, 2)) + L },
+        { comp: "L. TETTUCCIO", pezzi: 1, taglio: L - 67 },
+        { comp: "H TETTUCCIO", pezzi: 1, taglio: 39 }
+      ];
+
+      const tbody = document.getElementById("risultati");
+      tbody.innerHTML = "";
+      risultati.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${r.comp}</td><td>${r.pezzi}</td><td>${r.taglio.toFixed(2)}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+  </script>
 </body>
 </html>
