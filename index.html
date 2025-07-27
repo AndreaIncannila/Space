@@ -1,1 +1,33 @@
-<!DOCTYPE html><html><head><title>Calcolo SPACE</title></head><body><h1>Calcolo SPACE</h1><script src='script.js'></script></body></html>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>SPACE MONO CAMPATA BQ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>SPACE MONO CAMPATA BQ</h1>
+  <form>
+    <label>Larghezza (mm): <input type="number" id="larghezza"></label><br>
+    <label>Profondità (mm): <input type="number" id="profondita"></label><br>
+    <label>Altezza anteriore (mm): <input type="number" id="anteriore"></label><br>
+    <label>Altezza posteriore (mm): <input type="number" id="posteriore"></label><br>
+    <label>Tettuccio:
+      <select id="tettuccio">
+        <option value="SI">SI</option>
+        <option value="NO">NO</option>
+      </select>
+    </label><br>
+    <label>Montaggio:
+      <select id="montaggio">
+        <option value="parete">parete</option>
+        <option value="soffitto">soffitto</option>
+      </select>
+    </label><br><br>
+    <button type="button" onclick="calcola()">Calcola</button>
+  </form>
+  <pre id="output">Inserisci i dati e premi "Calcola".</pre>
+  <script src="script.js"></script>
+</body>
+</html>
